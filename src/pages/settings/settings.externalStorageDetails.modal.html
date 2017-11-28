@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>External Storage Details</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of details">
+            <ion-note>
+                <p>Path: {{item.path}}</p>
+                <p>Type: {{item.type}}</p>
+                <p>Can write: {{item.canWrite}}</p>
+                <p>Free space: {{item.freeSpace}}</p>
+            </ion-note>
+        </ion-item>
+    </ion-list>
+</ion-content>

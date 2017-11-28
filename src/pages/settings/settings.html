@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Settings
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h5>Open settings</h5>
+    <button class="os-conditional android ios" ion-button full (click)="diagnostic.switchToSettings()">Open app settings</button>
+    <button class="os-conditional android windows" ion-button full (click)="diagnostic.switchToLocationSettings()">Open location settings</button>
+    <button class="os-conditional android windows" ion-button full (click)="diagnostic.switchToBluetoothSettings()">Open Bluetooth settings</button>
+    <button class="os-conditional android windows" ion-button full (click)="diagnostic.switchToWifiSettings()">Open WiFi settings</button>
+    <button class="os-conditional android windows" ion-button full (click)="diagnostic.switchToMobileDataSettings()">Open Mobile data settings</button>
+    <button class="os-conditional android" ion-button full (click)="diagnostic.switchToWirelessSettings()">Open Wireless settings</button>
+    <button class="os-conditional android" ion-button full (click)="diagnostic.switchToNFCSettings()">Open NFC settings</button>
+
+    <h5>Request permissions</h5>
+    <button class="os-conditional ios"
+          disabled="{{diagnosticService.canRequestLocationAuthorization() ? '' : 'disabled'}}"
+          ion-button full
+          (click)="diagnosticService.requestLocationAuthorization(diagnostic.locationAuthorizationMode.ALWAYS)">
+      Request Location Usage Always</button>
+    <button class="os-conditional ios"
+          disabled="{{diagnosticService.canRequestLocationAuthorization() ? '' : 'disabled'}}"
+          ion-button full
+          (click)="diagnosticService.requestLocationAuthorization(diagnostic.locationAuthorizationMode.WHEN_IN_USE)">
+      Request Location When In Use</button>
+    <button class="os-conditional android"
+          disabled="{{diagnosticService.canRequestLocationAuthorization() ? '' : 'disabled'}}"
+          ion-button full
+          (click)="diagnosticService.requestLocationAuthorization()">
+      Request Location Permission</button>
+    <button class="os-conditional ios"
+            disabled="{{diagnosticService.canRequestBluetoothAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestBluetoothAuthorization()">
+        Request Bluetooth Permission</button>
+    <button class="os-conditional android ios"
+            disabled="{{diagnosticService.canRequestCameraAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestCameraAuthorization()">
+        Request Camera Permission</button>
+    <button class="os-conditional ios"
+            disabled="{{diagnosticService.canRequestCameraRollAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestCameraRollAuthorization()">
+        Request Camera Roll Permission</button>
+    <button class="os-conditional android ios"
+            disabled="{{diagnosticService.canRequestMicrophoneAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestMicrophoneAuthorization()">
+        Request Microphone Permission</button>
+    <button class="os-conditional android ios"
+            disabled="{{diagnosticService.canRequestContactsAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestContactsAuthorization()">
+        Request Contacts Permission</button>
+    <button class="os-conditional android ios"
+            disabled="{{diagnosticService.canRequestCalendarAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestCalendarAuthorization()">
+        Request Calendar Permission</button>
+    <button class="os-conditional ios"
+            disabled="{{diagnosticService.canRequestRemindersAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestRemindersAuthorization()">
+        Request Reminders Permission</button>
+    <button class="os-conditional ios"
+            disabled="{{diagnosticService.canRequestMotionAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestAndCheckMotionAuthorization()">
+        Request/Check Motion Permission</button>
+    <button class="os-conditional android"
+            disabled="{{diagnosticService.canRequestExternalStorageAuthorization() ? '' : 'disabled'}}"
+            ion-button full
+            (click)="diagnosticService.requestExternalStorageAuthorization()">
+        Request External Storage Permission</button>
+
+    <h5>Use permissions</h5>
+    <button disabled="{{diagnosticService.isLocationAvailable() ? '' : 'disabled'}}" ion-button full (click)="showCurrentLocation()">Show Current Location</button>
+    <button disabled="{{diagnosticService.isCameraAvailable() ? '' : 'disabled'}}" ion-button full (click)="useCamera()">Use Camera</button>
+    <button *ngIf="diagnosticService.canEnableBluetooth()" class="os-conditional android windows" ion-button full (click)="enableBluetooth()">Enable Bluetooth</button>
+    <button *ngIf="diagnosticService.canDisableBluetooth()" class="os-conditional android windows" ion-button full (click)="disableBluetooth()">Disable Bluetooth</button>
+    <button *ngIf="diagnosticService.canEnableWifi()" class="os-conditional android windows" ion-button full (click)="enableWifi()">Enable Wifi</button>
+    <button *ngIf="diagnosticService.canDisableWifi()"class="os-conditional android windows"  ion-button full (click)="disableWifi()">Disable Wifi</button>
+    <button class="os-conditional android" disabled="{{diagnosticService.canGetExternalStorageDetails() ? '' : 'disabled'}}" ion-button full (click)="getExternalStorageDetails()">Get External Storage Details</button>
+    <button class="os-conditional android" disabled="{{writableExternalStoragePath ? '' : 'disabled'}}" ion-button full (click)="writeToExternalStorage()">Write to External Storage</button>
+    <button *ngIf="!isBackgroundFetching()"class="os-conditional ios"  ion-button full (click)="startBackgroundFetching()">Start BG Fetching</button>
+    <button *ngIf="isBackgroundFetching()"class="os-conditional ios"  ion-button full (click)="stopBackgroundFetching()">Stop BG Fetching</button>
+</ion-content>

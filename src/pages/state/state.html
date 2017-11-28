@@ -1,0 +1,348 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>State</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="state" padding>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light"><h1>Location</h1></ion-item-divider>
+      <ion-item>
+        Availability
+        <ion-note item-right [ngSwitch]="diagnosticService.locationAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        Setting
+        <ion-note item-right [ngSwitch]="diagnosticService.locationEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android-only">
+        GPS availability
+        <ion-note item-right [ngSwitch]="diagnosticService.gpsLocationAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android-only">
+        Network availability
+        <ion-note item-right [ngSwitch]="diagnosticService.networkLocationAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android-only">
+        GPS setting
+        <ion-note item-right [ngSwitch]="diagnosticService.gpsLocationEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android-only">
+        Network setting
+        <ion-note item-right [ngSwitch]="diagnosticService.networkLocationEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android-only">
+        Mode
+        <ion-note item-right>
+          <span>{{diagnosticService.locationMode | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.locationAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.locationAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light"><h1>Camera</h1></ion-item-divider>
+      <ion-item>
+        Availability
+        <ion-note item-right [ngSwitch]="diagnosticService.cameraAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        Presence
+        <ion-note item-right [ngSwitch]="diagnosticService.cameraPresent">
+          <span class="on" *ngSwitchCase="true">PRESENT</span>
+          <span class="off" *ngSwitchCase="false">NOT PRESENT</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+      Authorization
+      <ion-note item-right [ngSwitch]="diagnosticService.cameraAuthorized">
+        <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+        <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+      </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.cameraAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional ios">
+      <ion-item-divider color="light"><h1>Camera Roll</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.cameraRollAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.cameraRollAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light"><h1>WiFi</h1></ion-item-divider>
+      <ion-item>
+        Availability
+        <ion-note item-right [ngSwitch]="diagnosticService.wifiAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Setting
+        <ion-note item-right [ngSwitch]="diagnosticService.wifiEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light"><h1>Bluetooth</h1></ion-item-divider>
+      <ion-item class="os-conditional android">
+        Supported
+        <ion-note item-right [ngSwitch]="diagnosticService.bluetoothSupported">
+          <span class="on" *ngSwitchCase="true">SUPPORTED</span>
+          <span class="off" *ngSwitchCase="false">UNSUPPORTED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Availability
+        <ion-note item-right [ngSwitch]="diagnosticService.bluetoothAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android">
+        Setting
+        <ion-note item-right [ngSwitch]="diagnosticService.bluetoothEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android ios">
+        State
+        <ion-note item-right>
+          <span>{{diagnosticService.bluetoothState | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android">
+        Low Energy (LE) Mode
+        <ion-note item-right [ngSwitch]="diagnosticService.bluetoothLESupported">
+          <span class="on" *ngSwitchCase="true">SUPPORTED</span>
+          <span class="off" *ngSwitchCase="false">UNSUPPORTED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item class="os-conditional android">
+        LE Peripheral Mode
+        <ion-note item-right [ngSwitch]="diagnosticService.bluetoothPeripheralSupported">
+          <span class="on" *ngSwitchCase="true">SUPPORTED</span>
+          <span class="off" *ngSwitchCase="false">UNSUPPORTED</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional android ios">
+      <ion-item-divider color="light"><h1>Microphone</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.microphoneAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.microphoneAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional android ios">
+      <ion-item-divider color="light"><h1>Contacts (Address Book)</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.contactsAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.contactsAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional android ios">
+      <ion-item-divider color="light"><h1>Calendar</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.calendarAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.calendarAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional ios">
+      <ion-item-divider color="light"><h1>Reminders</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.remindersAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.remindersAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional ios">
+      <ion-item-divider color="light"><h1>Background refresh</h1></ion-item-divider>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.backgroundRefreshAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.backgroundRefreshAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional ios">
+      <ion-item-divider color="light"><h1>Remote (push) notifications</h1></ion-item-divider>
+      <ion-item>
+        Setting
+        <ion-note item-right [ngSwitch]="diagnosticService.remoteNotificationsEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">DISABLED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Registered
+        <ion-note item-right [ngSwitch]="diagnosticService.remoteNotificationsRegistered">
+          <span class="on" *ngSwitchCase="true">REGISTERED</span>
+          <span class="off" *ngSwitchCase="false">NOT REGISTERED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item *ngIf="diagnosticService.remoteNotificationsTypes">
+        Types
+        <ion-note item-right>
+          <p *ngFor="let type of keysGetter(diagnosticService.remoteNotificationsTypes);">{{type}} = {{diagnosticService.remoteNotificationsTypes[type] ?
+            "Y" : "N"}}</p>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional ios">
+      <ion-item-divider color="light"><h1>Motion</h1></ion-item-divider>
+      <ion-item>
+        Tracking
+        <ion-note item-right [ngSwitch]="diagnosticService.motionTrackingAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization
+        <ion-note item-right [ngSwitch]="diagnosticService.motionAuthorizationStatusAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.motionAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional android">
+      <ion-item-divider color="light"><h1>NFC</h1></ion-item-divider>
+      <ion-item>
+        Availability
+        <ion-note item-right [ngSwitch]="diagnosticService.nfcAvailable">
+          <span class="on" *ngSwitchCase="true">AVAILABLE</span>
+          <span class="off" *ngSwitchCase="false">UNAVAILABLE</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Presence
+        <ion-note item-right [ngSwitch]="diagnosticService.nfcPresent">
+          <span class="on" *ngSwitchCase="true">PRESENT</span>
+          <span class="off" *ngSwitchCase="false">NOT PRESENT</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Setting
+        <ion-note item-right [ngSwitch]="diagnosticService.nfcEnabled">
+          <span class="on" *ngSwitchCase="true">ENABLED</span>
+          <span class="off" *ngSwitchCase="false">NOT ENABLED</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group class="os-conditional android">
+      <ion-item-divider color="light"><h1>External SD card</h1></ion-item-divider>
+      <ion-item>
+        Authorized
+        <ion-note item-right [ngSwitch]="diagnosticService.externalSdAuthorized">
+          <span class="on" *ngSwitchCase="true">AUTHORIZED</span>
+          <span class="off" *ngSwitchCase="false">UNAUTHORIZED</span>
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        Authorization status
+        <ion-note item-right>
+          <span>{{diagnosticService.externalSdAuthorizationStatus | uppercase}}</span>
+        </ion-note>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

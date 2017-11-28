@@ -1,0 +1,33 @@
+@import "../../theme/variables";
+
+page-state {
+
+  ion-item-divider h1{
+    margin-top: 2px !important;
+  }
+
+  ion-item{
+    min-height: 3rem !important;
+  }
+
+  ion-label{
+    margin: 0 !important;
+  }
+
+
+  ion-note{
+    margin: 0 8px 0 0 !important;
+    color: black !important;
+    span{
+      padding: 1px 2px;
+      &.on{
+        background-color: green;
+      }
+      &.off{
+        background-color: red;
+      }
+    }
+
+  }
+
+}
